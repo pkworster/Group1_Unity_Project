@@ -400,3 +400,4 @@ Received Import Request.
 Start importing Assets/Splash_Screen_Assets/Virus_Purple.jpg using Guid(e67d598d8e6f47641aac66587f27574a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '7e70a006920659d0dd16b366aadbe0a1') in 0.047146 seconds 
   Import took 0.049726 seconds .
 
+AssetImportWorkerClient::OnTransportError - code=2 error=End of file
