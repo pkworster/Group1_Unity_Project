@@ -17,4 +17,4 @@ public class Main_Menu_Func : MonoBehaviour
         Debug.Log("Goodbye!");
     }
 }
-// Menu Functionality for Main
+// Setup and Functionality for Main Menu - Peter Worster
