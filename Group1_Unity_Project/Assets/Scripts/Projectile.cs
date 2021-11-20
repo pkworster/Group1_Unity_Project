@@ -5,24 +5,25 @@ using UnityEngine;
 public class Projectile : MonoBehaviour
 {
 
-    public float speed = 10.0f;
     public Rigidbody2D bullet;
+    public float speed = 10.0f;
     private float startTime;
-    private float deathTimer;
-    public float maxTime = 8.0f;
+    private float deathTime;
+    public float maxTime = 8.0f; // Max time of bullet before it destroys itself
+    public float rotationSpeed = -1200.0f; 
+
+
     // Start is called before the first frame update
     void Start()
     {
-        startTime = Time.time;
-        deathTimer = startTime;
+        deathTime = Time.time + maxTime;
         bullet.velocity = transform.right * speed;
     }
 
     // Update is called once per frame
     void Update()
     {
-        deathTimer = deathTimer + Time.deltaTime;
-        if (deathTimer - startTime > maxTime)
+        if (Time.time > deathTime)
         {
             Destroy(gameObject);
         }
@@ -30,7 +31,8 @@ public class Projectile : MonoBehaviour
 
     void FixedUpdate() 
     {
-        bullet.transform.Rotate(Vector3.forward * -600 * Time.deltaTime);    
+        //Rotate the bullet every frame cause why not
+        bullet.transform.Rotate(Vector3.forward * rotationSpeed * Time.fixedDeltaTime);    
     }
 
     void OnCollisionEnter2D(Collision2D other) {

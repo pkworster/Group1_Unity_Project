@@ -6,7 +6,10 @@ public class PlayerShooting : MonoBehaviour
 {
     
     public GameObject projectile;
+    public float cooldown = 1.5f;
     private bool justFired;
+    public float nextFire;
+
 
     // Start is called before the first frame update
     void Start()
@@ -16,8 +19,7 @@ public class PlayerShooting : MonoBehaviour
 
     private void FixedUpdate() 
     {
-        if (justFired)
-        {
+        if (justFired) {
             Instantiate(projectile, transform.position, transform.rotation);
             justFired = false;
         }    
@@ -25,8 +27,10 @@ public class PlayerShooting : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown("left ctrl")){
+        if (Input.GetKeyDown("left ctrl") && Time.time > nextFire)
+        {
             justFired = true;
+            nextFire = Time.time + cooldown;
         }
     }
 }
