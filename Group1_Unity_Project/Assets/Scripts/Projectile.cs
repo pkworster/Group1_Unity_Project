@@ -35,7 +35,12 @@ public class Projectile : MonoBehaviour
         bullet.transform.Rotate(Vector3.forward * rotationSpeed * Time.fixedDeltaTime);    
     }
 
-    void OnCollisionEnter2D(Collision2D other) {
+    private void OnTriggerEnter2D(Collider2D collision) {
+        if(collision.gameObject.GetComponent<Enemy>() != null) {
+            Enemy enemy = collision.gameObject.GetComponent<Enemy>();
+            enemy.Damage(1);
+        }
+
         Destroy(gameObject);
     }
 }

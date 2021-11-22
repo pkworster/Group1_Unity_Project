@@ -19,6 +19,8 @@ public class PlayerController : MonoBehaviour
     public float horizontalVelocity;
     public float verticalVelocity;
 
+    public int health = 10;
+
     int direction = 1;
     
 
@@ -73,6 +75,12 @@ public class PlayerController : MonoBehaviour
     private bool isGrounded() 
     {
         return Physics2D.BoxCast(playerCollider.bounds.center, playerCollider.bounds.size, 0f, Vector2.down, 0.1f, jumpLayer);
+    }
+
+    public void Damage(int dmg) 
+    {
+        Debug.Log("Player should be taking health damage");
+        health = health - dmg;
     }    
     
 }
