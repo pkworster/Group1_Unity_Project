@@ -36,11 +36,11 @@ public class Projectile : MonoBehaviour
     }
 
     private void OnTriggerEnter2D(Collider2D collision) {
-        if(collision.gameObject.GetComponent<Enemy>() != null) {
+        Destroy(gameObject);
+        if(collision.gameObject.GetComponent<Enemy>() != null && collision.isTrigger) {
             Enemy enemy = collision.gameObject.GetComponent<Enemy>();
             enemy.Damage(1);
         }
 
-        Destroy(gameObject);
     }
 }
