@@ -14,18 +14,28 @@ public class Player_Health : MonoBehaviour
     void Start()
     {
         currentHealth = maxHealth;
-        health_Bar.SetHealth(maxHealth);
+        health_Bar.maxValue = maxHealth;
     }
 
     // Update is called once per frame
-    void Update()
+    public void UpdateHealth(float mod)
     {
-        if (Input.GetKeyDown(KeyCode.Space))
-            //this is just to test functionality... will be on event.
+        if (currentHealth > maxHealth)
         {
-            TakeDamage(10);
+            currentHealth = maxHealth;
+        }
+        else if (currentHealth <= 0f)
+        {
+            currentHealth = 0f;
+            health_Bar.value = currentHealth;
+            PlayerDied();
         }
     }
+    private void ()
+        {
+        LevelManager.instance.GameOver();
+        }
+        
     void TakeDamage(int damage)
     {
         currentHealth -= damage;
@@ -33,4 +43,6 @@ public class Player_Health : MonoBehaviour
         health_Bar.SetHealth(currentHealth);
     }
 }
+
 // player health script - Peter Worster
+// Test Parts out - death screen tie ins - Peter Worster 11/22
