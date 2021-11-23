@@ -39,6 +39,7 @@ public class PlayerController : MonoBehaviour
         if(justJumped){
             playerBody.AddForce(new Vector2(0f, jumpForce), ForceMode2D.Impulse);
             justJumped = false;
+
         }
 
         //Change player horizontal velocity based on the pressed key.
@@ -62,6 +63,7 @@ public class PlayerController : MonoBehaviour
         if(Input.GetKeyDown("space") && isGrounded()) 
         {
             justJumped = true;
+            
         }
 
         //Reset the player's position by pressing 'r'

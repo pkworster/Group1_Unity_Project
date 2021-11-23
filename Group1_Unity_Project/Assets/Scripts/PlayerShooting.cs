@@ -31,6 +31,7 @@ public class PlayerShooting : MonoBehaviour
         {
             justFired = true;
             nextFire = Time.time + cooldown;
+            
         }
     }
 }
