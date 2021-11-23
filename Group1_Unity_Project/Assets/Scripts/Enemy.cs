@@ -6,8 +6,8 @@ public class Enemy : MonoBehaviour
 {
     public float horizontalVelocity;
     public float health;
-    public float moveTime = 2.0f;
-    public float stopTime = 2.0f;
+    public float movePatternTime = 2.0f;
+    public float stopPatternTime = 2.0f;
     private float stopTimeEnd;
     private float moveTimeEnd;
 
@@ -19,7 +19,7 @@ public class Enemy : MonoBehaviour
     void Start()
     {
         body = gameObject.GetComponent<Rigidbody2D>();
-        stopTimeEnd = Time.time + stopTime;
+        Stop(stopPatternTime);
     }
 
     // Update is called once per frame
@@ -33,7 +33,7 @@ public class Enemy : MonoBehaviour
 
                 //If the timer has passed our set movement time then stop and set a new random direction.
                 if(Time.time > moveTimeEnd){
-                    Stop();
+                    Stop(stopPatternTime);
                     int nextDirection = Random.Range(0,2);
                     if(nextDirection == 1){
                         horizontalVelocity = horizontalVelocity * -1;
@@ -45,7 +45,7 @@ public class Enemy : MonoBehaviour
 
                 //Check if we've passed our set stopping time and if we have, move
                 if(Time.time > stopTimeEnd) {
-                    Move();
+                    Move(movePatternTime);
                 }
             }
         }
@@ -62,22 +62,23 @@ public class Enemy : MonoBehaviour
         }
     }
 
-    private void OnTriggerEnter2D(Collider2D other) {
+    private void OnCollisionEnter2D(Collision2D other) 
+    {
         //If we see that the object we collided into has a PlayerController script we call its Damage function
-        if(other.gameObject.GetComponent<PlayerController>() != null) {
+        if(other.collider.gameObject.GetComponent<PlayerController>() != null) {
             PlayerController player = other.gameObject.GetComponent<PlayerController>();
             player.Damage(4); //This can be set to whatever.
         }
     }
 
 
-    private void Move()
+    private void Move(float moveTime)
     {
         isMoving = true;
         moveTimeEnd = Time.time + moveTime;
     }
 
-    private void Stop() 
+    private void Stop(float stopTime) 
     {
         isMoving = false;
         stopTimeEnd = Time.time + stopTime;
