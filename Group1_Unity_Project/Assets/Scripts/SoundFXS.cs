@@ -8,6 +8,7 @@ public class SoundFXS : MonoBehaviour
     public AudioSource EnemyDeath;
     public AudioSource PlayerHit;
     public AudioSource EnemyHit;
+    public AudioSource Jump;
 
     public void PlayFire ()
     {
@@ -26,6 +27,16 @@ public class SoundFXS : MonoBehaviour
         {
             Fire.Stop();
         }
-
+        if (Input.GetKeyDown("space"))
+        {
+            if (!Jump.isPlaying)
+            {
+                Jump.Play();
+            }
+        }
+        if (Input.GetKeyUp("space"))
+        {
+            Jump.Stop();
+        }
     }
 }
