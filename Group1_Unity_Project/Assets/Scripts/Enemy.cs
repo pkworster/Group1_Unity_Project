@@ -5,51 +5,69 @@ using UnityEngine;
 public class Enemy : MonoBehaviour
 {
     public float horizontalVelocity;
+    //public float verticalVelocity;
     public float health;
     public float movePatternTime = 2.0f;
-    public float stopPatternTime = 2.0f;
+    public float stopPatternTime = 1.0f;
+    public float jumpPatternTime = 2.5f;
     private float stopTimeEnd;
     private float moveTimeEnd;
+    private float jumpTimeEnd;
 
     public bool isReady = false;
-    [SerializeField]
     private bool isMoving;
+    private bool isJumping;
+    public float jumpPower;
     private Rigidbody2D body;
     // Start is called before the first frame update
     void Start()
     {
         body = gameObject.GetComponent<Rigidbody2D>();
         Stop(stopPatternTime);
+        jumpTimeEnd = Time.time + jumpPatternTime;
+        
     }
 
     // Update is called once per frame
+
+    private void FixedUpdate() 
+    {
+        if(Time.time > jumpTimeEnd){
+            Jump();
+            jumpTimeEnd = Time.time + jumpPatternTime;
+        }
+        
+    }
     void Update()
     {
         //First checks to see if it's "on" or ready
         if(isReady){
             if(isMoving) {
                 //If we're set to move then move horizontally
-                body.velocity = Vector2.right * horizontalVelocity;
+                body.velocity = new Vector2(horizontalVelocity, body.velocity.y);
 
-                //If the timer has passed our set movement time then stop and set a new random direction.
+                //If the timer has passed our set movement time then stop
                 if(Time.time > moveTimeEnd){
-                    Stop(stopPatternTime);
-                    int nextDirection = Random.Range(0,2);
-                    if(nextDirection == 1){
-                        horizontalVelocity = horizontalVelocity * -1;
-                    }
+                    //Stop(stopPatternTime);
                 }
             } else {
                 //If we're not set to move then stop moving
-                body.velocity = Vector2.zero;
+                body.velocity = new Vector2(0f, body.velocity.y);
 
                 //Check if we've passed our set stopping time and if we have, move
                 if(Time.time > stopTimeEnd) {
+                    //Set a new random direction.
+                    int nextDirection = Random.Range(0,2);
+                    if(nextDirection == 1){
+                        horizontalVelocity = horizontalVelocity * -1;
+                        transform.Rotate(0f, 180f, 0f);
+                    }
                     Move(movePatternTime);
                 }
             }
         }
 
+        //Kill our enemy if it has no health
         if(health <= 0) {
             Destroy(gameObject);
         }
@@ -82,5 +100,10 @@ public class Enemy : MonoBehaviour
     {
         isMoving = false;
         stopTimeEnd = Time.time + stopTime;
+    }
+
+    private void Jump()
+    {
+        body.AddForce(new Vector2(0f, jumpPower), ForceMode2D.Impulse);
     }
 }
