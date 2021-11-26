@@ -519,9 +519,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 58425040}
-  - component: {fileID: 58425039}
   - component: {fileID: 58425043}
   - component: {fileID: 58425042}
+  - component: {fileID: 58425039}
   - component: {fileID: 58425041}
   m_Layer: 0
   m_Name: The_Rona
@@ -625,10 +625,10 @@ Rigidbody2D:
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
-  m_Mass: 5
+  m_Mass: 1
   m_LinearDrag: 0
   m_AngularDrag: 0
-  m_GravityScale: 1
+  m_GravityScale: 3
   m_Material: {fileID: 0}
   m_Interpolate: 1
   m_SleepingMode: 1
@@ -649,10 +649,13 @@ MonoBehaviour:
   horizontalVelocity: -8
   health: 5
   movePatternTime: 2
-  stopPatternTime: 2
-  jumpPatternTime: 3.5
+  stopPatternTime: 1
+  jumpPatternTime: 2.5
   isReady: 1
-  jumpPower: 50
+  jumpPower: 28
+  jumpLayer:
+    serializedVersion: 2
+    m_Bits: 8
 --- !u!1 &64439900
 GameObject:
   m_ObjectHideFlags: 0
@@ -1338,10 +1341,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 202685081}
-  - component: {fileID: 202685080}
+  - component: {fileID: 202685079}
   - component: {fileID: 202685083}
   - component: {fileID: 202685082}
-  - component: {fileID: 202685079}
+  - component: {fileID: 202685080}
   - component: {fileID: 202685084}
   - component: {fileID: 202685085}
   m_Layer: 0
@@ -1363,8 +1366,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a7df63dc25c119e49afa3628880ad489, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 10
-  jumpForce: 20
+  speed: 12.5
+  jumpForce: 30
   jumpLayer:
     serializedVersion: 2
     m_Bits: 8
@@ -1484,7 +1487,7 @@ Rigidbody2D:
   m_Mass: 1
   m_LinearDrag: 0
   m_AngularDrag: 0
-  m_GravityScale: 1
+  m_GravityScale: 5
   m_Material: {fileID: 0}
   m_Interpolate: 1
   m_SleepingMode: 1
@@ -3226,7 +3229,7 @@ Camera:
     height: 1
   near clip plane: 0.3
   far clip plane: 1000
-  field of view: 80
+  field of view: 120
   orthographic: 0
   orthographic size: 5
   m_Depth: -1
@@ -6423,7 +6426,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1206318572}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1.24, y: -0.1, z: 0}
+  m_LocalPosition: {x: 1.318, y: -0.044, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
