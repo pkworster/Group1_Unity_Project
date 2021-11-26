@@ -7,7 +7,7 @@ public class Enemy : MonoBehaviour
     public float horizontalVelocity;
     //public float verticalVelocity;
     public float health;
-    public float movePatternTime = 2.0f;
+    public float movePatternTime = 4.0f;
     public float stopPatternTime = 1.0f;
     public float jumpPatternTime = 2.5f;
     private float stopTimeEnd;
@@ -19,10 +19,13 @@ public class Enemy : MonoBehaviour
     private bool isJumping;
     public float jumpPower;
     private Rigidbody2D body;
+    private CircleCollider2D enemyCollider;
+    public LayerMask jumpLayer;
     // Start is called before the first frame update
     void Start()
     {
         body = gameObject.GetComponent<Rigidbody2D>();
+        enemyCollider = gameObject.GetComponent<CircleCollider2D>();
         Stop(stopPatternTime);
         jumpTimeEnd = Time.time + jumpPatternTime;
         
@@ -32,7 +35,7 @@ public class Enemy : MonoBehaviour
 
     private void FixedUpdate() 
     {
-        if(Time.time > jumpTimeEnd){
+        if(Time.time > jumpTimeEnd && isMoving){
             Jump();
             jumpTimeEnd = Time.time + jumpPatternTime;
         }
@@ -47,8 +50,8 @@ public class Enemy : MonoBehaviour
                 body.velocity = new Vector2(horizontalVelocity, body.velocity.y);
 
                 //If the timer has passed our set movement time then stop
-                if(Time.time > moveTimeEnd){
-                    //Stop(stopPatternTime);
+                if(Time.time > moveTimeEnd && isGrounded()){
+                    Stop(stopPatternTime);
                 }
             } else {
                 //If we're not set to move then stop moving
@@ -105,5 +108,10 @@ public class Enemy : MonoBehaviour
     private void Jump()
     {
         body.AddForce(new Vector2(0f, jumpPower), ForceMode2D.Impulse);
+    }
+
+    private bool isGrounded() 
+    {
+        return Physics2D.BoxCast(enemyCollider.bounds.center, enemyCollider.bounds.size, 0f, Vector2.down, 0.1f, jumpLayer);
     }
 }
