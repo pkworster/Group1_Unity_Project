@@ -17,6 +17,9 @@ public class CameraController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (playerObj == null)
+            return;
+        // should remove error when player gets killed - 11/29 Peter Worster
         transform.position = playerObj.transform.position + offset;
     }
 }
