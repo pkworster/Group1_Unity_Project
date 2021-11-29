@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PlayerController : MonoBehaviour
 {
@@ -82,6 +83,10 @@ public class PlayerController : MonoBehaviour
     {
         Debug.Log("Player just took health damage");
         health = health - dmg;
-    }    
-    
+    }
+    public void OnCollisionEnter2D(Collision2D collision)
+    {
+  
+    }
+
 }

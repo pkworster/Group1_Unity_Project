@@ -15,6 +15,15 @@ public class Player : MonoBehaviour
 
     public int fallBoundary = -40;
 
+    int dmg = 25;
+
+    //should add collision damage?????
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.tag == "Enemy")
+            playerStats.Health -= dmg;
+    }
+
     private void Update()
     {
         if (transform.position.y <= fallBoundary)
@@ -22,9 +31,9 @@ public class Player : MonoBehaviour
     }
 
 
-    public void DamagePlayer (int damage)
+    public void DamagePlayer (int dmg)
     {
-        playerStats.Health -= damage;
+        playerStats.Health -= dmg;
         if (playerStats.Health <=0)
         {
             GameMaster.KillPlayer(this);
