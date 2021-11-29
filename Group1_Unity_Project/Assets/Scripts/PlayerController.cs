@@ -39,7 +39,6 @@ public class PlayerController : MonoBehaviour
         if(justJumped){
             playerBody.AddForce(new Vector2(0f, jumpForce), ForceMode2D.Impulse);
             justJumped = false;
-
         }
 
         //Change player horizontal velocity based on the pressed key.
