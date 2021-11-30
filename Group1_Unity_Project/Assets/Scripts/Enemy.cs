@@ -5,12 +5,11 @@ using UnityEngine;
 public class Enemy : MonoBehaviour
 {
     public float horizontalVelocity;
-    //public float verticalVelocity;
     public float health;
-    public float movePatternTime = 4.0f;
-    public float stopPatternTime = 1.0f;
-    public float jumpPatternTime = 2.5f;
-    private float stopTimeEnd;
+    public float moveInterval = 4.0f; //Time enemy spends moving forwards
+    public float stopInterval = 1.0f; //Time enemy spends stopping
+    public float jumpInterval = 2.5f; // Time enemy waits between jumps
+    private float stopTimeEnd; //Timers for each
     private float moveTimeEnd;
     private float jumpTimeEnd;
 
@@ -26,8 +25,8 @@ public class Enemy : MonoBehaviour
     {
         body = gameObject.GetComponent<Rigidbody2D>();
         enemyCollider = gameObject.GetComponent<CircleCollider2D>();
-        Stop(stopPatternTime);
-        jumpTimeEnd = Time.time + jumpPatternTime;
+        Stop(stopInterval);
+        jumpTimeEnd = Time.time + jumpInterval;
         
     }
 
@@ -37,12 +36,8 @@ public class Enemy : MonoBehaviour
     {
         if(Time.time > jumpTimeEnd && isMoving){
             Jump();
-            jumpTimeEnd = Time.time + jumpPatternTime;
+            jumpTimeEnd = Time.time + jumpInterval;
         }
-        
-    }
-    void Update()
-    {
         //First checks to see if it's "on" or ready
         if(isReady){
             if(isMoving) {
@@ -51,7 +46,7 @@ public class Enemy : MonoBehaviour
 
                 //If the timer has passed our set movement time then stop
                 if(Time.time > moveTimeEnd && isGrounded()){
-                    Stop(stopPatternTime);
+                    Stop(stopInterval);
                 }
             } else {
                 //If we're not set to move then stop moving
@@ -60,16 +55,18 @@ public class Enemy : MonoBehaviour
                 //Check if we've passed our set stopping time and if we have, move
                 if(Time.time > stopTimeEnd) {
                     //Set a new random direction.
-                    int nextDirection = Random.Range(0,2);
-                    if(nextDirection == 1){
+                    if (Random.Range(0, 2) == 1){
                         horizontalVelocity = horizontalVelocity * -1;
                         transform.Rotate(0f, 180f, 0f);
                     }
-                    Move(movePatternTime);
+                    Move(moveInterval);
                 }
             }
         }
-
+        
+    }
+    void Update()
+    {
         //Kill our enemy if it has no health
         if(health <= 0) {
             Destroy(gameObject);

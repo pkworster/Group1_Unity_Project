@@ -137,6 +137,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bullet: {fileID: -7055297190408481469}
-  speed: 20
+  speed: 35
   maxTime: 1.25
   rotationSpeed: -1200
