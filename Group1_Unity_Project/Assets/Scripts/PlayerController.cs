@@ -9,7 +9,6 @@ public class PlayerController : MonoBehaviour
     public float speed = 20.0f;
     private Rigidbody2D playerBody;
     private BoxCollider2D playerCollider;
-    private RaycastHit2D groundedHit;
 
 
     public float jumpForce = 30.0f;
@@ -17,10 +16,15 @@ public class PlayerController : MonoBehaviour
     private bool justJumped;
     private bool isJumping;
 
-    public float horizontalVelocity;
-    public float verticalVelocity;
+    public int fallBoundary = -40;
+
+    private float horizontalVelocity;
+    private float verticalVelocity;
 
     public int health = 10;
+    private float damageCooldown = 1.0f; // Time before player can take damage again in seconds
+
+    private float nextDamageTime;
 
     int direction = 1;
     
@@ -57,6 +61,12 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        
+        //If the player goes below the fall boundary, it dies
+        if (transform.position.y <= fallBoundary){
+            KillPlayer();
+        }
+
         horizontalInput = Input.GetAxis("Horizontal");
 
         //Check if the player is pressing down and is on ground.
@@ -81,9 +91,23 @@ public class PlayerController : MonoBehaviour
 
     public void Damage(int dmg) 
     {
-        Debug.Log("Player just took health damage");
-        health = health - dmg;
+        
+        if(Time.time > nextDamageTime) {  
+            health = health - dmg;
+            if (health <=0)
+            {
+                KillPlayer();
+            }
+        } else {
+            nextDamageTime = Time.time + damageCooldown;
+        }
     }
+
+    public void KillPlayer()
+    {
+        Destroy(gameObject);
+    }
+
     public void OnCollisionEnter2D(Collision2D collision)
     {
   

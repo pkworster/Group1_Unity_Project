@@ -516,6 +516,7 @@ MonoBehaviour:
   moveInterval: 4
   stopInterval: 1
   jumpInterval: 2.5
+  fallBoundary: -40
   isReady: 1
   jumpPower: 28
   jumpLayer:
@@ -1208,10 +1209,9 @@ GameObject:
   - component: {fileID: 202685081}
   - component: {fileID: 202685080}
   - component: {fileID: 202685083}
-  - component: {fileID: 202685082}
   - component: {fileID: 202685079}
-  - component: {fileID: 202685084}
   - component: {fileID: 202685085}
+  - component: {fileID: 202685082}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -1236,8 +1236,7 @@ MonoBehaviour:
   jumpLayer:
     serializedVersion: 2
     m_Bits: 8
-  horizontalVelocity: 0
-  verticalVelocity: 0
+  fallBoundary: -40
   health: 10
 --- !u!212 &202685080
 SpriteRenderer:
@@ -1357,21 +1356,6 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 1
   m_Constraints: 4
---- !u!114 &202685084
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 202685078}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 165aba78b57e85e44a57adfb6bbc647f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  playerStats:
-    Health: 100
-  fallBoundary: -40
 --- !u!114 &202685085
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6448,7 +6432,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   projectile: {fileID: 287253189762320384, guid: 866a3755d67c6b54c9bbc28838ef0011, type: 3}
   cooldown: 0.3
-  nextFire: 0
 --- !u!1 &1210267272
 GameObject:
   m_ObjectHideFlags: 0

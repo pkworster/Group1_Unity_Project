@@ -6,12 +6,15 @@ public class Enemy : MonoBehaviour
 {
     public float horizontalVelocity;
     public float health;
+    public int damagePower;
     public float moveInterval = 4.0f; //Time enemy spends moving forwards
     public float stopInterval = 1.0f; //Time enemy spends stopping
     public float jumpInterval = 2.5f; // Time enemy waits between jumps
     private float stopTimeEnd; //Timers for each
     private float moveTimeEnd;
     private float jumpTimeEnd;
+
+    public int fallBoundary = -40;
 
     public bool isReady = false;
     private bool isMoving;
@@ -67,16 +70,21 @@ public class Enemy : MonoBehaviour
     }
     void Update()
     {
-        //Kill our enemy if it has no health
-        if(health <= 0) {
-            Destroy(gameObject);
+        //If the enemy goes below the fall boundary, it dies
+        if (transform.position.y <= fallBoundary){
+            Kill();
         }
+        
     }
 
     public void Damage(int dmg) {
         if(isReady){
-            Debug.Log("In damage function");
             health = health - dmg;
+
+            //Kill our enemy if it has no health
+            if(health <= 0) {
+                Kill();
+            }
         }
     }
 
@@ -85,7 +93,9 @@ public class Enemy : MonoBehaviour
         //If we see that the object we collided into has a PlayerController script we call its Damage function
         if(other.collider.gameObject.GetComponent<PlayerController>() != null) {
             PlayerController player = other.gameObject.GetComponent<PlayerController>();
-            player.Damage(25); //This can be set to whatever.
+            player.Damage(damagePower); //This can be set to whatever.
+            float collisionX = other.GetContact(0).point.x;
+            other.rigidbody.AddForce(new Vector2(collisionX * -10, 20), ForceMode2D.Impulse);
         }
     }
 
@@ -110,5 +120,10 @@ public class Enemy : MonoBehaviour
     private bool isGrounded() 
     {
         return Physics2D.BoxCast(enemyCollider.bounds.center, enemyCollider.bounds.size, 0f, Vector2.down, 0.1f, jumpLayer);
+    }
+
+    private void Kill()
+    {
+        Destroy(gameObject);
     }
 }

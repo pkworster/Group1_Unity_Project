@@ -8,7 +8,7 @@ public class PlayerShooting : MonoBehaviour
     public GameObject projectile;
     public float cooldown = 1.5f;
     private bool justFired;
-    public float nextFire;
+    private float nextFire;
 
 
     // Start is called before the first frame update
