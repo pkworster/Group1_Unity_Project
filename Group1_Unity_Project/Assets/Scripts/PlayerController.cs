@@ -22,9 +22,13 @@ public class PlayerController : MonoBehaviour
     private float verticalVelocity;
 
     public int health = 10;
+    public Color invulnerableColor;
+    public float damageRecoil = 10.0f;
     private float damageCooldown = 1.0f; // Time before player can take damage again in seconds
 
     private float nextDamageTime;
+    private bool inputEnabled;
+    private float inputTimer;
 
     int direction = 1;
     
@@ -32,36 +36,50 @@ public class PlayerController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        inputEnabled = true;
+        nextDamageTime = 0;
         //Grab our player's Rigidbody and Collider
         playerBody = gameObject.GetComponent<Rigidbody2D>();
         playerCollider = gameObject.GetComponent<BoxCollider2D>();
-
     }
     
     void FixedUpdate() 
     {
-        //If we just jumped, add an initial force.
-        if(justJumped){
-            playerBody.AddForce(new Vector2(0f, jumpForce), ForceMode2D.Impulse);
-            justJumped = false;
+        if(inputEnabled) {
+            //If we just jumped, add an initial force.
+            if(justJumped){
+                playerBody.AddForce(new Vector2(0f, jumpForce), ForceMode2D.Impulse);
+                justJumped = false;
+            }
+
+            //Change player horizontal velocity based on the pressed key.
+            horizontalVelocity = speed * horizontalInput;
+            playerBody.velocity = new Vector2(horizontalVelocity, playerBody.velocity.y);
+
+            //Flip the character around the x axis if they change direction.
+            if (horizontalVelocity * direction < 0f) {
+                direction *= -1;
+                transform.Rotate(0f, 180f, 0f);
+            }
         }
-
-        //Change player horizontal velocity based on the pressed key.
-        horizontalVelocity = speed * horizontalInput;
-        playerBody.velocity = new Vector2(horizontalVelocity, playerBody.velocity.y);
-
-        //Flip the character around the x axis if they change direction.
-        if (horizontalVelocity * direction < 0f) {
-            direction *= -1;
-            transform.Rotate(0f, 180f, 0f);
-        }
-
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+        if(Time.time > inputTimer && inputEnabled == false) {
+            inputEnabled = true;
+        }
+        // Change back to default color if the player can be damaged
+        if(Time.time > nextDamageTime) {
+            foreach (Transform child in transform)
+            {
+                if(child.gameObject.GetComponent<SpriteRenderer>() != null){
+                SpriteRenderer render =  child.gameObject.GetComponent<SpriteRenderer>();
+                render.color = Color.white;
+                }
+            }
+        }
         //If the player goes below the fall boundary, it dies
         if (transform.position.y <= fallBoundary){
             KillPlayer();
@@ -92,16 +110,44 @@ public class PlayerController : MonoBehaviour
     public void Damage(int dmg) 
     {
         
-        if(Time.time > nextDamageTime) {  
+        
+        if(Time.time > nextDamageTime) {
+            
+            //Disable the input
+            inputEnabled = false;
+            inputTimer = Time.time + 0.5f;
+
+            //Change all the player's objects' transparencies
+            foreach (Transform child in transform)
+            {
+                if(child.gameObject.GetComponent<SpriteRenderer>() != null){
+                SpriteRenderer render =  child.gameObject.GetComponent<SpriteRenderer>();
+                render.color = invulnerableColor;
+                }
+            }
+            
+
+            
+            //Stop player movement
+            playerBody.velocity = Vector2.zero;
+
+            //Knockback
+            Vector2 newForce;
+            newForce.x = Mathf.Sign(transform.rotation.y) * damageRecoil * -1;
+            newForce.y = 5.0f;
+            playerBody.AddForce(newForce, ForceMode2D.Impulse);
+
+            nextDamageTime = Time.time + damageCooldown;
+
             health = health - dmg;
             if (health <=0)
             {
                 KillPlayer();
             }
-        } else {
-            nextDamageTime = Time.time + damageCooldown;
         }
     }
+
+
 
     public void KillPlayer()
     {

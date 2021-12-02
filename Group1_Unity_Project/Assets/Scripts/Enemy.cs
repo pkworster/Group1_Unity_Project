@@ -93,9 +93,7 @@ public class Enemy : MonoBehaviour
         //If we see that the object we collided into has a PlayerController script we call its Damage function
         if(other.collider.gameObject.GetComponent<PlayerController>() != null) {
             PlayerController player = other.gameObject.GetComponent<PlayerController>();
-            player.Damage(damagePower); //This can be set to whatever.
-            float collisionX = other.GetContact(0).point.x;
-            other.rigidbody.AddForce(new Vector2(collisionX * -10, 20), ForceMode2D.Impulse);
+            player.Damage(damagePower); //This can be set to whatever. 
         }
     }
 
