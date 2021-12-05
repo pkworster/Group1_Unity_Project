@@ -31,6 +31,9 @@ public class PlayerController : MonoBehaviour
     private float inputTimer;
 
     int direction = 1;
+
+    //attempting to animate sprite - Peter Worster
+    public Animator animator;
     
 
     // Start is called before the first frame update
@@ -67,6 +70,7 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        
         if(Time.time > inputTimer && inputEnabled == false) {
             inputEnabled = true;
         }
@@ -87,8 +91,12 @@ public class PlayerController : MonoBehaviour
 
         horizontalInput = Input.GetAxis("Horizontal");
 
+        // prob should be in its own movement script...but hey I'm gonna try this first - Peter Worster
+        // added Mathf so it animated when moving left - Peter
+        animator.SetFloat("Speed", Mathf.Abs (horizontalInput));
+
         //Check if the player is pressing down and is on ground.
-        if(Input.GetKeyDown("space") && isGrounded()) 
+        if (Input.GetKeyDown("space") && isGrounded()) 
         {
             justJumped = true;
             
