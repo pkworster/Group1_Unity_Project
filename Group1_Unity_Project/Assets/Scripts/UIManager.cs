@@ -11,3 +11,4 @@ public class UIManager : MonoBehaviour
         deathScreen.SetActive(!deathScreen.activeSelf);
     }
 }
+// this is just to toggle Death screen on and off - Peter Worster

@@ -20,12 +20,29 @@ public class Player : MonoBehaviour
         {
             TakeDamage(20);
         }
+        // Added death ... works with tab test - 12/6 Peter Worster
+        if (currentHealth <= 0)
+        {
+            PlayerDied();
+        }
     }
     void TakeDamage(int damage)
     {
         currentHealth -= damage;
 
         healthBar.SetHealth(currentHealth);
+    }
+    private void PlayerDied()
+    {
+        LevelManager.instance.GameOver();
+        gameObject.SetActive(false);
+    }
+    public void OnCollisionStay(Collision col)
+    {
+        if (col.gameObject.tag == ("Enemy"))
+            {
+            TakeDamage(20);
+            }
     }
 }
 

@@ -1343,16 +1343,16 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 102900000, guid: 8f3357c32832999478ceb340f78aec5b, type: 3}
-        m_TargetAssemblyTypeName: Main_Menu_Func, Assembly-CSharp
-        m_MethodName: 
-        m_Mode: 1
+      - m_Target: {fileID: 1452943665}
+        m_TargetAssemblyTypeName: StateManager, Assembly-CSharp
+        m_MethodName: ChangeSceneByName
+        m_Mode: 5
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: 
+          m_StringArgument: Menu
           m_BoolArgument: 0
         m_CallState: 2
 --- !u!114 &317124720
@@ -3817,7 +3817,7 @@ GameObject:
   - component: {fileID: 831435736}
   - component: {fileID: 831435737}
   m_Layer: 0
-  m_Name: BackgroundMusic
+  m_Name: DeathMusic
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -6283,8 +6283,9 @@ GameObject:
   - component: {fileID: 1236045694}
   - component: {fileID: 1236045696}
   - component: {fileID: 1236045695}
+  - component: {fileID: 1236045697}
   m_Layer: 5
-  m_Name: Death_Menu
+  m_Name: DeathScreen
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -6351,6 +6352,20 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1236045693}
   m_CullTransparentMesh: 1
+--- !u!114 &1236045697
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1236045693}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e92363ffd299f5748a705c53b59f009b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  BackgroundMusic: {fileID: 201934625}
+  DeathMusic: {fileID: 831435737}
 --- !u!1 &1285007499
 GameObject:
   m_ObjectHideFlags: 0
@@ -6963,6 +6978,7 @@ GameObject:
   - component: {fileID: 1452943662}
   - component: {fileID: 1452943661}
   - component: {fileID: 1452943664}
+  - component: {fileID: 1452943665}
   m_Layer: 0
   m_Name: LevelManager
   m_TagString: Untagged
@@ -6982,7 +6998,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e6eb74aab57f19b4a8c19627afa5fcc8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  deathScreen: {fileID: 0}
+  deathScreen: {fileID: 1236045693}
 --- !u!114 &1452943662
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7020,6 +7036,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f70cb69ecf6de934fa117ff658c76e37, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1452943665
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1452943660}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b44f3f793c48f9041bba2abcff657065, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &1455333555
@@ -7577,9 +7605,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 102900000, guid: ec17b96182e69cb4ebeaee0fd5d622aa, type: 3}
-        m_TargetAssemblyTypeName: Main_Menu_Func, Assembly-CSharp
-        m_MethodName: 
+      - m_Target: {fileID: 1452943665}
+        m_TargetAssemblyTypeName: StateManager, Assembly-CSharp
+        m_MethodName: ReloadCurrentScene
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -9803,6 +9831,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2130571455392541765, guid: b55039fa13aba364491f32c83b8eed08, type: 3}
+      propertyPath: damagePower
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2130571455392541767, guid: b55039fa13aba364491f32c83b8eed08, type: 3}
+      propertyPath: m_IsTrigger
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7485841658198101760, guid: b55039fa13aba364491f32c83b8eed08, type: 3}
       propertyPath: m_RootOrder
       value: 6
@@ -9923,6 +9959,10 @@ PrefabInstance:
     - target: {fileID: 2144453599579215739, guid: e4632837010c0a6448e86aa045a63623, type: 3}
       propertyPath: m_Offset.y
       value: 2.0246
+      objectReference: {fileID: 0}
+    - target: {fileID: 2144453599579215739, guid: e4632837010c0a6448e86aa045a63623, type: 3}
+      propertyPath: m_IsTrigger
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2144453599579215739, guid: e4632837010c0a6448e86aa045a63623, type: 3}
       propertyPath: m_SpriteTilingProperty.newSize.x
