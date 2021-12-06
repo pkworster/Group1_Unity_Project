@@ -4,46 +4,29 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
-    // attempting class within a class... in the event we want to do more things than a health bar
+    public int maxHealth = 100;
+    public int currentHealth;
 
-    [System.Serializable]
-    public class PlayerStats
+    public HealthBar healthBar;
+
+    void Start()
     {
-        public float Health = 100;
+        currentHealth = maxHealth;
+        healthBar.SetMaxHealth(maxHealth);
     }
-    public PlayerStats playerStats = new PlayerStats();
-
-    public int fallBoundary = -40;
-
-    int dmg = 25;
-
-    //should add collision damage?????
-    private void OnCollisionEnter2D(Collision2D collision)
+    void Update()
     {
-        if (collision.gameObject.tag == "Enemy")
-            playerStats.Health -= dmg;
-    }
-
-    private void Update()
-    {
-        if (transform.position.y <= fallBoundary)
-            DamagePlayer(999999999);
-    }
-
-
-    public void DamagePlayer (int dmg)
-    {
-        playerStats.Health -= dmg;
-        if (playerStats.Health <=0)
+        if (Input.GetKeyDown(KeyCode.Tab))
         {
-            GameMaster.KillPlayer(this);
+            TakeDamage(20);
         }
     }
-    private void Start()
+    void TakeDamage(int damage)
     {
-        
-    }
+        currentHealth -= damage;
 
+        healthBar.SetHealth(currentHealth);
+    }
 }
 
 
@@ -52,3 +35,4 @@ public class Player : MonoBehaviour
 // Test Parts out - death screen tie ins - Peter Worster 11/21
 // wiped out... going to try something different 11/22
 // 2nd or 3rd attempt 11/28
+// 12/5 put test things back in... attempting a different version
