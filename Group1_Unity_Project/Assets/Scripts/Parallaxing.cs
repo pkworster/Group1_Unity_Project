@@ -4,7 +4,7 @@ using UnityEngine;
 public class Parallaxing : MonoBehaviour
 {
     public Transform[] backgrounds;         // background list for effect
-    private float[] parallaxScales;         // amount of effect
+    public float[] parallaxScales;         // amount of effect
     public float smoothing;                 // hopefully smooths the effect... set above 0... I think
 
     private Transform cam;                  // ref for the main camera
@@ -40,6 +40,9 @@ public class Parallaxing : MonoBehaviour
             backgrounds[i].position = Vector3.Lerp(backgrounds[i].position, backgroundTargetPos, smoothing * Time.deltaTime);
         }
         previousCamPos = cam.position;
+        
     }
+    
+
 }
 // second attempt at parallax - Peter Worster
