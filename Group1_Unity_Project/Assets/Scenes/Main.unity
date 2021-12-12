@@ -7824,6 +7824,7 @@ GameObject:
   - component: {fileID: 1452943661}
   - component: {fileID: 1452943664}
   - component: {fileID: 1452943665}
+  - component: {fileID: 1452943666}
   m_Layer: 0
   m_Name: LevelManager
   m_TagString: Untagged
@@ -7895,6 +7896,34 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b44f3f793c48f9041bba2abcff657065, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1452943666
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1452943660}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8847439d4719951479bc8a66984b916c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  waves:
+  - name: Rona1
+    enemy: {fileID: 1965914103}
+    count: 5
+    rate: 1
+  - name: Rona2
+    enemy: {fileID: 1965914103}
+    count: 10
+    rate: 1.5
+  - name: Rona3
+    enemy: {fileID: 1965914103}
+    count: 15
+    rate: 2
+  timeBetweenWaves: 5
+  waveCountdown: 3
+  state: 2
 --- !u!1 &1455333555
 GameObject:
   m_ObjectHideFlags: 0
@@ -7933,7 +7962,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -1509.164, y: 1417.0546}
+  m_AnchoredPosition: {x: -1907, y: 1409}
   m_SizeDelta: {x: 260.6301, y: 88.664}
   m_Pivot: {x: -4.0817266, y: 16.818085}
 --- !u!114 &1455333557
@@ -10621,6 +10650,11 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!4 &1965914103 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 7485841658198101760, guid: b55039fa13aba364491f32c83b8eed08, type: 3}
+  m_PrefabInstance: {fileID: 2130571455341597334}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &2003989227
 GameObject:
   m_ObjectHideFlags: 0
