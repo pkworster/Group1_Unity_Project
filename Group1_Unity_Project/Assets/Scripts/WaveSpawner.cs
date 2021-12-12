@@ -22,6 +22,7 @@ public class WaveSpawner : MonoBehaviour
     public float waveCountdown;
     private float searchCountdown = 1f;
     public SpawnState state = SpawnState.counting;
+    public Transform[] spawnPoints;
 
 
 
@@ -109,7 +110,14 @@ public class WaveSpawner : MonoBehaviour
     {
         //spawn the enemy
         Debug.Log("Spawnage:" + _enemy.name);
+        //check
+        if (spawnPoints.Length == 0)
+        {
+            Debug.LogError("No spawn point my dude!!!");
+        }
+        //spawn points
+        Transform _sp = spawnPoints[Random.Range(0, spawnPoints.Length)];
         // enemy
-        Instantiate(_enemy, transform.position, transform.rotation);
+        Instantiate(_enemy, _sp.position, _sp.rotation);
     }
 }
