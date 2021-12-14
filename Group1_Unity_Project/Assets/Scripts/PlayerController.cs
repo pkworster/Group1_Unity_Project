@@ -99,8 +99,12 @@ public class PlayerController : MonoBehaviour
         if (Input.GetKeyDown("space") && isGrounded()) 
         {
             justJumped = true;
-            
+            // Animation for jump - 12/13 Peter Worster
+            animator.SetBool("justJumped", true);
+
+
         }
+        
 
         //Reset the player's position by pressing 'r'
         if (Input.GetKeyDown("r"))
