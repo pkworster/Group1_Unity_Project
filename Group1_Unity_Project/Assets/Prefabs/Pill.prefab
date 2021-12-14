@@ -121,8 +121,8 @@ CapsuleCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  m_Size: {x: 0.42, y: 0.91}
+  m_Offset: {x: 0.66233766, y: -0.50649345}
+  m_Size: {x: 1.5746753, y: 1.5746753}
   m_Direction: 0
 --- !u!114 &-6666801151066823404
 MonoBehaviour:
@@ -138,5 +138,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   bullet: {fileID: -7055297190408481469}
   speed: 35
-  maxTime: 1.25
+  maxTime: 1.5
   rotationSpeed: -1200
