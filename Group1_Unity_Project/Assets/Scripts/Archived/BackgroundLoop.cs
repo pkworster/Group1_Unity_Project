@@ -7,7 +7,6 @@ public class BackgroundLoop : MonoBehaviour
     public GameObject[] levels;
     private Camera mainCamera;
     private Vector2 screenBounds;
-
     void Start()
     {
         mainCamera = gameObject.GetComponent<Camera>();

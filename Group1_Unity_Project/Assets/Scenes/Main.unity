@@ -1119,21 +1119,17 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
---- !u!114 &202685086
+--- !u!114 &202685090 stripped
 MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
+  m_CorrespondingSourceObject: {fileID: 2144453599579215734, guid: e4632837010c0a6448e86aa045a63623, type: 3}
+  m_PrefabInstance: {fileID: 2144453599779794401}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 202685078}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 165aba78b57e85e44a57adfb6bbc647f, type: 3}
+  m_Script: {fileID: 11500000, guid: a7df63dc25c119e49afa3628880ad489, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 100
-  currentHealth: 100
-  healthBar: {fileID: 1455333557}
 --- !u!1 &215496324
 GameObject:
   m_ObjectHideFlags: 0
@@ -3842,7 +3838,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 519420028}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e6a8fcbf01e6b5b4f91c9ca2c7bebd4c, type: 3}
   m_Name: 
@@ -9335,6 +9331,7 @@ MonoBehaviour:
     m_NumColorKeys: 3
     m_NumAlphaKeys: 2
   fill: {fileID: 1669553940}
+  playerObject: {fileID: 202685090}
 --- !u!114 &1455333558
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -12823,7 +12820,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 2130571455392541765, guid: b55039fa13aba364491f32c83b8eed08, type: 3}
       propertyPath: damagePower
-      value: 2
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 2130571455392541767, guid: b55039fa13aba364491f32c83b8eed08, type: 3}
       propertyPath: m_IsTrigger
@@ -12913,6 +12910,10 @@ PrefabInstance:
     - target: {fileID: 2144453599579215734, guid: e4632837010c0a6448e86aa045a63623, type: 3}
       propertyPath: speed
       value: 25
+      objectReference: {fileID: 0}
+    - target: {fileID: 2144453599579215734, guid: e4632837010c0a6448e86aa045a63623, type: 3}
+      propertyPath: health
+      value: 100
       objectReference: {fileID: 0}
     - target: {fileID: 2144453599579215734, guid: e4632837010c0a6448e86aa045a63623, type: 3}
       propertyPath: animator

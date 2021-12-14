@@ -90,9 +90,9 @@ public class Enemy : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D other) 
     {
-        //If we see that the object we collided into has a PlayerController script we call its Damage function
-        if(other.collider.gameObject.GetComponent<PlayerController>() != null) {
-            PlayerController player = other.gameObject.GetComponent<PlayerController>();
+        //If we see that the object we collided into has a Player script we call its Damage function
+        if(other.collider.gameObject.GetComponent<Player>() != null) {
+            Player player = other.gameObject.GetComponent<Player>();
             player.Damage(damagePower); //This can be set to whatever. 
         }
     }
