@@ -54,6 +54,7 @@ public class Player : MonoBehaviour
         defaultColor = playerRenderer.color;
     }
     
+    //All the actual physics takes place in FixedUpdate()
     void FixedUpdate() 
     {
         if(inputEnabled) {
@@ -152,6 +153,9 @@ public class Player : MonoBehaviour
     {
         //Is the player pressing right/left?
         horizontalInput = Input.GetAxis("Horizontal");
+        // prob should be in its own movement script...but hey I'm gonna try this first - Peter Worster
+        // added Mathf so it animated when moving left - Peter
+        animator.SetFloat("Speed", Mathf.Abs (horizontalInput));
 
         //Check if the player is pressing down and is on ground.
         if (Input.GetKeyDown("space") && isGrounded()) 
