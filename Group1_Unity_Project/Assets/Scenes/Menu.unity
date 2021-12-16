@@ -771,7 +771,7 @@ GameObject:
   - component: {fileID: 496685432}
   - component: {fileID: 496685431}
   m_Layer: 5
-  m_Name: Back_Button
+  m_Name: Play_Button
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -795,8 +795,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 532, y: -275}
-  m_SizeDelta: {x: -161.3279, y: -239.344}
+  m_AnchoredPosition: {x: 417.71866, y: -275}
+  m_SizeDelta: {x: 67.235, y: -239.344}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &496685431
 MonoBehaviour:
@@ -842,22 +842,10 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1671831179}
-        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
-        m_MethodName: SetActive
-        m_Mode: 6
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 195593679}
-        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
-        m_MethodName: SetActive
-        m_Mode: 6
+      - m_Target: {fileID: 1671831181}
+        m_TargetAssemblyTypeName: Main_Menu_Func, Assembly-CSharp
+        m_MethodName: PlayGame
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -2239,7 +2227,7 @@ GameObject:
   - component: {fileID: 1191078855}
   - component: {fileID: 1191078854}
   m_Layer: 5
-  m_Name: Back_Text
+  m_Name: Play_Text
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2262,7 +2250,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 81, y: -33}
+  m_AnchoredPosition: {x: 244, y: -39}
   m_SizeDelta: {x: 252.34589, y: 105.954895}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1191078854
@@ -2285,7 +2273,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Back
+  m_text: Let's Play !!!
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: dc36b3fdc14f47ebb36fd484a67e268a, type: 2}
   m_sharedMaterial: {fileID: 2140032, guid: dc36b3fdc14f47ebb36fd484a67e268a, type: 2}
@@ -2348,7 +2336,7 @@ MonoBehaviour:
   m_VertexBufferAutoSizeReduction: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: 0, y: 0, z: 108.27069, w: 40.601524}
+  m_margin: {x: -241.33972, y: 0, z: 108.27069, w: 40.601524}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_hasFontAssetChanged: 0
@@ -2711,6 +2699,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1810427899}
   - component: {fileID: 1810427900}
+  - component: {fileID: 1810427901}
   m_Layer: 5
   m_Name: Controls_Menu
   m_TagString: Untagged
@@ -2753,6 +2742,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   audioMixer: {fileID: 24100000, guid: 93171ce0cc87be14f89041fd3e3c1fcb, type: 2}
+--- !u!114 &1810427901
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1810427898}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 49a0817cd1cb546448aa5f2bdaac51b8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &2080448199
 GameObject:
   m_ObjectHideFlags: 0
