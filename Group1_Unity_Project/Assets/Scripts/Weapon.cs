@@ -2,27 +2,34 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerShooting : MonoBehaviour
+public class Weapon : MonoBehaviour
 {
-    
-    public GameObject projectile;
     public float cooldown = 1.5f;
     private bool justFired;
     private float nextFire;
+    public GameObject bullet;
+
+    //public int maxBullets; <- Currently not implemented
+    public Transform shotPoint;
 
 
+    void Awake() 
+    {
+
+    }
     // Start is called before the first frame update
     void Start()
     {
-        
+
     }
 
     private void FixedUpdate() 
     {
         if (justFired) {
-            Instantiate(projectile, transform.position, transform.rotation);
+            GameObject newBullet = Instantiate(bullet, shotPoint.transform.position, shotPoint.transform.rotation);
             justFired = false;
-        }    
+        }
+                
     }
     // Update is called once per frame
     void Update()
