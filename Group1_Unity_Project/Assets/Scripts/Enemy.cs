@@ -82,8 +82,13 @@ public class Enemy : MonoBehaviour
             health = health - dmg;
 
             //Kill our enemy if it has no health
-            if(health <= 0) {
+            if(health <= 0) 
+            {
+                // Add score? Peter Worster - 12/15
+                UIManager.instance.killCount++;
+                UIManager.instance.UpdateKillCounterUI();
                 Kill();
+                
             }
         }
     }

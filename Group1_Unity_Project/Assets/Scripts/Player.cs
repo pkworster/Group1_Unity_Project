@@ -123,7 +123,11 @@ public class Player : MonoBehaviour
             PlayerDied();
         }
     }
-
+    // landing - Peter Worster 12/15
+    public void OnLanding()
+    {
+        animator.SetBool("justJumped", false);
+    }
     //Returns true if the player is on top of something
     private bool isGrounded() 
     {
