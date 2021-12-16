@@ -5,11 +5,15 @@ using UnityEngine.SceneManagement;
 
 public class Player : MonoBehaviour
 {
-    private float horizontalInput;
-    public float speed = 20.0f;
     private Rigidbody2D playerBody;
     private BoxCollider2D playerCollider;
     private SpriteRenderer playerRenderer;
+    private Animator animator; //attempting to animate sprite - Peter Worster
+    private float horizontalInput;
+    public float speed = 20.0f;
+
+    public GameObject Weapon1;
+    public GameObject Weapon2;
 
     public float jumpForce = 30.0f;
     public LayerMask jumpLayer;
@@ -32,20 +36,21 @@ public class Player : MonoBehaviour
     private float inputTimer;
 
     int direction = 1;
-
-    //attempting to animate sprite - Peter Worster
-    public Animator animator;
     
-
     // Start is called before the first frame update
     void Start()
     {
         inputEnabled = true;
         nextDamageTime = 0;
-        //Grab our player's Rigidbody and Collider
+        Weapon1.SetActive(true);
+        Weapon2.SetActive(false);
+        
+
+        //Grab our player's components
         playerBody = gameObject.GetComponent<Rigidbody2D>();
         playerCollider = gameObject.GetComponent<BoxCollider2D>();
         playerRenderer = gameObject.GetComponent<SpriteRenderer>();
+        animator = gameObject.GetComponent<Animator>();
         defaultColor = playerRenderer.color;
     }
     
@@ -73,55 +78,15 @@ public class Player : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
-        if (Input.GetKeyDown(KeyCode.Tab))
-        {
-            Damage(20);
-        }
+        playerDied(); // Check to see if the player died
 
         if(Time.time > inputTimer && inputEnabled == false) {
             inputEnabled = true;
         }
-        // Change back to default color if the player can be damaged
-        if(Time.time > nextDamageTime) {
-            playerRenderer.color = defaultColor;
-            foreach (Transform child in transform)
-            {
-                if(child.gameObject.GetComponent<SpriteRenderer>() != null){
-                SpriteRenderer render =  child.gameObject.GetComponent<SpriteRenderer>();
-                render.color = Color.white;
-                }
-            }
-        }
-        //If the player goes below the fall boundary, it dies
-        if (transform.position.y <= fallBoundary){
-            PlayerDied();
-        }
+        getInputs();
 
-        horizontalInput = Input.GetAxis("Horizontal");
-
-        // prob should be in its own movement script...but hey I'm gonna try this first - Peter Worster
-        // added Mathf so it animated when moving left - Peter
-        animator.SetFloat("Speed", Mathf.Abs (horizontalInput));
-
-        //Check if the player is pressing down and is on ground.
-        if (Input.GetKeyDown("space") && isGrounded()) 
-        {
-            justJumped = true;
-            // Animation for jump - 12/13 Peter Worster
-            animator.SetBool("justJumped", true);
-        }
+        resetColors();
         
-
-        if(health <= 0) {
-            PlayerDied();
-        }
-
-        //Instantly kill the player by pressing 'r'
-        if (Input.GetKeyDown("k"))
-        {
-            PlayerDied();
-        }
     }
 
     //Returns true if the player is on top of something
@@ -166,15 +131,65 @@ public class Player : MonoBehaviour
         }
     }
 
-    public void PlayerDied()
+    public void playerDied()
     {
-        LevelManager.instance.GameOver();
-        gameObject.SetActive(false);
+        if(health <= 0 || transform.position.y <= fallBoundary) {
+            LevelManager.instance.GameOver();
+            gameObject.SetActive(false);
+        }
     }
 
     public void OnCollisionEnter2D(Collision2D collision)
     {
   
+    }
+
+    private void getInputs()
+    {
+        //Is the player pressing right/left?
+        horizontalInput = Input.GetAxis("Horizontal");
+
+        //Check if the player is pressing down and is on ground.
+        if (Input.GetKeyDown("space") && isGrounded()) 
+        {
+            justJumped = true;
+            // Animation for jump - 12/13 Peter Worster
+            animator.SetBool("justJumped", true);
+        }
+
+        //Instantly kill the player by pressing 'k'
+        if (Input.GetKeyDown("k"))
+        {
+            health = -1;
+        }
+
+        if (Input.GetKeyDown("c"))
+        {
+            if(Weapon1.activeSelf)
+            {
+                Weapon1.SetActive(false);
+                Weapon2.SetActive(true);
+            }
+            else {
+                Weapon1.SetActive(true);
+                Weapon2.SetActive(false);
+            }
+        }
+    }
+    
+    private void resetColors()
+    {
+        // Change back to default color if the player can be damaged
+        if(Time.time > nextDamageTime) {
+            playerRenderer.color = defaultColor;
+            foreach (Transform child in transform)
+            {
+                if(child.gameObject.GetComponent<SpriteRenderer>() != null){
+                    SpriteRenderer render =  child.gameObject.GetComponent<SpriteRenderer>();
+                    render.color = Color.white;
+                }
+            }
+        }
     }
 
 }

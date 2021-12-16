@@ -2,12 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Projectile : MonoBehaviour
+public class EnemyProjectile : MonoBehaviour
 {
-
+    
     public Rigidbody2D bullet;
     private Collider2D bulletCollider;
-    public float speed = 10.0f;
+    public float speed = -10.0f;
     private float startTime;
     private float deathTime;
     public float maxTime = 8.0f; // Max time of bullet before it destroys itself
@@ -34,16 +34,16 @@ public class Projectile : MonoBehaviour
     void FixedUpdate() 
     {
         //Rotate the bullet every frame cause why not
-        bullet.transform.GetChild(0).Rotate(transform.forward * rotationSpeed * Time.fixedDeltaTime * Mathf.Sign(bullet.velocity.x));    
+        bullet.transform.GetChild(0).Rotate(transform.forward * rotationSpeed * Time.fixedDeltaTime);    
     }
 
     private void OnCollisionEnter2D(Collision2D collision) 
     {
-        if(collision.gameObject.GetComponent<Enemy>() != null) {
-            Enemy enemy = collision.gameObject.GetComponent<Enemy>();
-            enemy.Damage(1);
-            Destroy(gameObject);
+        Debug.Log("Enemy bullet collided with: " + collision.gameObject.ToString());
+        if(collision.gameObject.GetComponent<Player>() != null) {
+            Player player = collision.gameObject.GetComponent<Player>();
+            player.Damage(20);
         }
-
+        Destroy(gameObject);
     }
 }

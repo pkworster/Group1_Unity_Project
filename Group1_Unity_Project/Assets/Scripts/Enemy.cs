@@ -22,6 +22,8 @@ public class Enemy : MonoBehaviour
     public float jumpPower;
     private Rigidbody2D body;
     private CircleCollider2D enemyCollider;
+    public GameObject bullet;
+    public Transform shotPoint;
     public LayerMask jumpLayer;
     // Start is called before the first frame update
     void Start()
@@ -30,7 +32,6 @@ public class Enemy : MonoBehaviour
         enemyCollider = gameObject.GetComponent<CircleCollider2D>();
         Stop(stopInterval);
         jumpTimeEnd = Time.time + jumpInterval;
-        
     }
 
     // Update is called once per frame
@@ -50,10 +51,12 @@ public class Enemy : MonoBehaviour
                 //If the timer has passed our set movement time then stop
                 if(Time.time > moveTimeEnd && isGrounded()){
                     Stop(stopInterval);
+                    Shoot();
                 }
             } else {
                 //If we're not set to move then stop moving
                 body.velocity = new Vector2(0f, body.velocity.y);
+
 
                 //Check if we've passed our set stopping time and if we have, move
                 if(Time.time > stopTimeEnd) {
@@ -113,6 +116,11 @@ public class Enemy : MonoBehaviour
     private void Jump()
     {
         body.AddForce(new Vector2(0f, jumpPower), ForceMode2D.Impulse);
+    }
+
+    private void Shoot() 
+    {
+        GameObject newBullet = Instantiate(bullet, shotPoint.transform.position, shotPoint.transform.rotation);
     }
 
     private bool isGrounded() 
