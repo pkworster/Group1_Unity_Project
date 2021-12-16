@@ -19,6 +19,7 @@ public class Player : MonoBehaviour
     public LayerMask jumpLayer;
     private bool justJumped;
     private bool isJumping;
+    private bool isSelecting;
 
     public int fallBoundary = -40;
 
@@ -182,6 +183,10 @@ public class Player : MonoBehaviour
                 Weapon1.SetActive(true);
                 Weapon2.SetActive(false);
             }
+        }
+        if (Input.GetMouseButtonDown(0))
+        {
+            isSelecting = true;
         }
     }
     
