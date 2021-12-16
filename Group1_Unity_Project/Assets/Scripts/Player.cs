@@ -184,9 +184,9 @@ public class Player : MonoBehaviour
                 Weapon2.SetActive(false);
             }
         }
-        if (Input.GetMouseButtonDown(0))
+        if (Input.GetKeyDown(KeyCode.E))
         {
-            isSelecting = true;
+            SceneManager.LoadScene("Credits");
         }
     }
     
