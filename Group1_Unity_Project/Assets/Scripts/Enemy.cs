@@ -10,8 +10,6 @@ public class Enemy : MonoBehaviour
     public float moveInterval = 4.0f; //Time enemy spends moving forwards
     public float stopInterval = 1.0f; //Time enemy spends stopping
     public float jumpInterval = 2.5f; // Time enemy waits between jumps
-    private float stopTimeEnd; //Timers for each
-    private float moveTimeEnd;
     private float jumpTimeEnd;
 
     public int fallBoundary = -40;
@@ -23,6 +21,8 @@ public class Enemy : MonoBehaviour
     private Rigidbody2D body;
     private CircleCollider2D enemyCollider;
     public GameObject bullet;
+
+    public Transform playerTransform;
     public Transform shotPoint;
     public LayerMask jumpLayer;
     // Start is called before the first frame update
@@ -30,8 +30,9 @@ public class Enemy : MonoBehaviour
     {
         body = gameObject.GetComponent<Rigidbody2D>();
         enemyCollider = gameObject.GetComponent<CircleCollider2D>();
-        Stop(stopInterval);
+        //Stop(stopInterval);
         jumpTimeEnd = Time.time + jumpInterval;
+        StartCoroutine(Move(moveInterval, stopInterval));
     }
 
     // Update is called once per frame
@@ -47,26 +48,9 @@ public class Enemy : MonoBehaviour
             if(isMoving) {
                 //If we're set to move then move horizontally
                 body.velocity = new Vector2(horizontalVelocity, body.velocity.y);
-
-                //If the timer has passed our set movement time then stop
-                if(Time.time > moveTimeEnd && isGrounded()){
-                    Stop(stopInterval);
-                    Shoot();
-                }
             } else {
                 //If we're not set to move then stop moving
                 body.velocity = new Vector2(0f, body.velocity.y);
-
-
-                //Check if we've passed our set stopping time and if we have, move
-                if(Time.time > stopTimeEnd) {
-                    //Set a new random direction.
-                    if (Random.Range(0, 2) == 1){
-                        horizontalVelocity = horizontalVelocity * -1;
-                        transform.Rotate(0f, 180f, 0f);
-                    }
-                    Move(moveInterval);
-                }
             }
         }
         
@@ -91,7 +75,6 @@ public class Enemy : MonoBehaviour
                 UIManager.instance.killCount++;
                 UIManager.instance.UpdateKillCounterUI();
                 Kill();
-                
             }
         }
     }
@@ -106,16 +89,24 @@ public class Enemy : MonoBehaviour
     }
 
 
-    private void Move(float moveTime)
+    private IEnumerator Move(float moveTime, float stopTime)
     {
-        isMoving = true;
-        moveTimeEnd = Time.time + moveTime;
-    }
+        for(;;) {
 
-    private void Stop(float stopTime) 
-    {
-        isMoving = false;
-        stopTimeEnd = Time.time + stopTime;
+            isMoving = true;
+
+            //Set a new random direction.
+            if (Random.Range(0, 2) == 1)
+            {
+                horizontalVelocity = horizontalVelocity * -1;
+                transform.Rotate(0f, 180f, 0f);
+            }
+
+            yield return new WaitForSeconds(moveTime);
+            isMoving = false;
+            Shoot();
+            yield return new WaitForSeconds(stopTime);
+        }
     }
 
     private void Jump()

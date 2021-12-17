@@ -91,18 +91,13 @@ public class Player : MonoBehaviour
 
         resetColors();
 
-        Debug.Log(playerBody.velocity.y.ToString());
         if(isGrounded() && playerBody.velocity.y <= 0)
         {
             animator.SetBool("justJumped", false);
         }
         
     }
-    // landing - Peter Worster 12/15
-    public void OnLanding()
-    {
-        animator.SetBool("justJumped", false);
-    }
+    
     //Returns true if the player is on top of something
     private bool isGrounded() 
     {
