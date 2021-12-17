@@ -19,7 +19,6 @@ public class EnemyProjectile : MonoBehaviour
     {
         bulletCollider = gameObject.GetComponent<Collider2D>();
         deathTime = Time.time + maxTime;
-        bullet.velocity = transform.right * speed;
     }
 
     // Update is called once per frame
@@ -39,7 +38,6 @@ public class EnemyProjectile : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision) 
     {
-        Debug.Log("Enemy bullet collided with: " + collision.gameObject.ToString());
         if(collision.gameObject.GetComponent<Player>() != null) {
             Player player = collision.gameObject.GetComponent<Player>();
             player.Damage(20);

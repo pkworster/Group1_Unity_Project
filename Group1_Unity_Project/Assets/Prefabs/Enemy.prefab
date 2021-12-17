@@ -131,17 +131,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f562739bc351ba04eb8bc0ff04b986dd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  horizontalVelocity: -10
+  speed: -10
   health: 5
   damagePower: 20
-  moveInterval: 3
-  stopInterval: 1
+  moveInterval: 2
+  stopInterval: 0.5
   jumpInterval: 2.5
   fallBoundary: -40
   isReady: 1
   jumpPower: 28
-  bullet: {fileID: 3338877348290630727, guid: bb83d74a2df400e4b9ce76d1be08b48a, type: 3}
-  playerTransform: {fileID: 0}
+  bullet: {fileID: -7055297190408481469, guid: bb83d74a2df400e4b9ce76d1be08b48a, type: 3}
+  player: {fileID: 0}
   shotPoint: {fileID: 1446398897331514115}
   jumpLayer:
     serializedVersion: 2
