@@ -63,6 +63,8 @@ public class Player : MonoBehaviour
             if(justJumped){
                 playerBody.AddForce(new Vector2(0f, jumpForce), ForceMode2D.Impulse);
                 justJumped = false;
+                // Animation for jump - 12/13 Peter Worster
+                animator.SetBool("justJumped", true);
             }
 
             //Change player horizontal velocity based on the pressed key.
@@ -88,6 +90,12 @@ public class Player : MonoBehaviour
         getInputs();
 
         resetColors();
+
+        Debug.Log(playerBody.velocity.y.ToString());
+        if(isGrounded() && playerBody.velocity.y <= 0)
+        {
+            animator.SetBool("justJumped", false);
+        }
         
     }
     // landing - Peter Worster 12/15
@@ -98,7 +106,7 @@ public class Player : MonoBehaviour
     //Returns true if the player is on top of something
     private bool isGrounded() 
     {
-        return Physics2D.BoxCast(playerCollider.bounds.center, playerCollider.bounds.size, 0f, Vector2.down, 0.1f, jumpLayer);
+        return Physics2D.BoxCast(playerCollider.bounds.center, playerCollider.bounds.size, 0f, Vector2.down, 0.05f, jumpLayer);
     }
 
     public void Damage(int dmg) 
@@ -162,8 +170,6 @@ public class Player : MonoBehaviour
         if (Input.GetKeyDown("space") && isGrounded()) 
         {
             justJumped = true;
-            // Animation for jump - 12/13 Peter Worster
-            animator.SetBool("justJumped", true);
         }
 
         //Instantly kill the player by pressing 'k'
