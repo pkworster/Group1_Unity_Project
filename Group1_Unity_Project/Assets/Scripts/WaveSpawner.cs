@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class WaveSpawner : MonoBehaviour
 {
-    public enum SpawnState { spawning, waiting, counting };
+    public enum SpawnState {spawning, waiting, counting};
     [System.Serializable]
     // what the wave should be... defined
     public class Wave
@@ -16,11 +16,13 @@ public class WaveSpawner : MonoBehaviour
         public float rate;
 
     }
+
+    
     public Wave[] waves;
-    private int nextWave = 0;
+    public int nextWave = 0;
     public float timeBetweenWaves = 5f;
     public float waveCountdown;
-    private float searchCountdown = 1f;
+    public float searchCountdown = 1f;
     public SpawnState state = SpawnState.counting;
     public Transform[] spawnPoints;
 
@@ -81,17 +83,21 @@ public class WaveSpawner : MonoBehaviour
     }
     bool EnemyIsAlive()
     {
-        searchCountdown -= Time.deltaTime;
-        if (searchCountdown <= 0f)
-        {
-            searchCountdown = 1f;
-            if (GameObject.FindGameObjectsWithTag("Enemy") == null)
+        
+            searchCountdown -= Time.deltaTime;
+            if (searchCountdown <= 0f)
             {
-                return false;
+            searchCountdown = 1f;
+                if (GameObject.FindGameObjectsWithTag("Enemy") == null)
+                {
+                    return false;
+                }
+                
+                
             }
-        }
         return true;
     }
+
     IEnumerator SpawnWave(Wave _wave)
     {
         Debug.Log("Spawning spawnage:" + _wave.name);
@@ -109,7 +115,7 @@ public class WaveSpawner : MonoBehaviour
     void SpawnEnemy (Transform _enemy)
     {
         //spawn the enemy
-        Debug.Log("Spawnage:" + _enemy.name);
+        Debug.Log("Spawning Enemy:" + _enemy.name);
         //check
         if (spawnPoints.Length == 0)
         {

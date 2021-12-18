@@ -6251,7 +6251,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -415, y: 223}
+  m_AnchoredPosition: {x: -346, y: 223}
   m_SizeDelta: {x: 130.2713, y: 15.2438}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &736264299
@@ -10899,8 +10899,10 @@ MonoBehaviour:
     enemy: {fileID: 7485841658198101760, guid: b55039fa13aba364491f32c83b8eed08, type: 3}
     count: 15
     rate: 2
-  timeBetweenWaves: 5
-  waveCountdown: 3
+  nextWave: 0
+  timeBetweenWaves: 1
+  waveCountdown: 1
+  searchCountdown: 1
   state: 2
   spawnPoints:
   - {fileID: 314725670}
